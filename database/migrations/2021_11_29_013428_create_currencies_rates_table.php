@@ -17,7 +17,7 @@ class CreateCurrenciesRatesTable extends Migration
             $table->bigIncrements('id');
             $table->char('from', 3);
             $table->char('to', 3);
-            $table->float('quote');
+            $table->float('quote', 16, 4);
             $table->date('date');
             $table->timestamps();
 
