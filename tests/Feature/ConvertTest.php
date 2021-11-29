@@ -26,13 +26,15 @@ class ConvertTest extends TestCase
             [
                 'from' => 'USD',
                 'to' => 'BRL',
-                'value' => 10
-            ]
+                'value' => 10,
+            ],
         ]);
 
         $response->assertStatus(200);
-        $response->assertJson(fn(AssertableJson $json) => $json
-            ->has('0', fn(AssertableJson $json) => $json
+        $response->assertJson(fn (AssertableJson $json) => $json
+            ->has(
+                '0',
+                fn (AssertableJson $json) => $json
                 ->where('from', 'USD')
                 ->where('to', 'BRL')
                 ->where('value', 10)
@@ -48,25 +50,29 @@ class ConvertTest extends TestCase
             [
                 'from' => 'USD',
                 'to' => 'BRL',
-                'value' => 10
+                'value' => 10,
             ],
             [
                 'from' => 'BRL',
                 'to' => 'CLP',
                 'value' => 10,
-            ]
+            ],
         ]);
 
         $response->assertStatus(200);
-        $response->assertJson(fn(AssertableJson $json) => $json
-            ->has('0', fn(AssertableJson $json) => $json
+        $response->assertJson(fn (AssertableJson $json) => $json
+            ->has(
+                '0',
+                fn (AssertableJson $json) => $json
                 ->where('from', 'USD')
                 ->where('to', 'BRL')
                 ->where('value', 10)
                 ->where('quote', 5.67)
                 ->where('result', 56.70)
                 ->where('date', '2021-11-27')
-            )->has('1', fn(AssertableJson $json) => $json
+            )->has(
+                '1',
+                fn (AssertableJson $json) => $json
                 ->where('from', 'BRL')
                 ->where('to', 'CLP')
                 ->where('value', 10)
