@@ -17,7 +17,7 @@
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "lauana-oh/dracma": "dev-develop"
+        "lauana-oh/dracma": "^0.1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

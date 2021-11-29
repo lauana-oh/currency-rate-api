@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27d8b803c1971c4cb5c6c73c1da5273b",
+    "content-hash": "e9dd8f8eb79f31231a33fa747d0a24a5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1324,16 +1324,16 @@
         },
         {
             "name": "lauana-oh/dracma",
-            "version": "dev-develop",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lauana-oh/dracma.git",
-                "reference": "4c6d3598ab930ed7333d246576a9e014e1e8b293"
+                "reference": "90f8068791491ef75757e26779811e973e94fc16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lauana-oh/dracma/zipball/4c6d3598ab930ed7333d246576a9e014e1e8b293",
-                "reference": "4c6d3598ab930ed7333d246576a9e014e1e8b293",
+                "url": "https://api.github.com/repos/lauana-oh/dracma/zipball/90f8068791491ef75757e26779811e973e94fc16",
+                "reference": "90f8068791491ef75757e26779811e973e94fc16",
                 "shasum": ""
             },
             "require": {
@@ -1393,10 +1393,10 @@
             ],
             "description": "Currencies rates manager for Laravel framework",
             "support": {
-                "source": "https://github.com/lauana-oh/dracma/tree/develop",
+                "source": "https://github.com/lauana-oh/dracma/tree/0.1.0",
                 "issues": "https://github.com/lauana-oh/dracma/issues"
             },
-            "time": "2021-11-29T01:17:13+00:00"
+            "time": "2021-11-29T05:09:48+00:00"
         },
         {
             "name": "league/commonmark",
@@ -8719,9 +8719,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "lauana-oh/dracma": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
