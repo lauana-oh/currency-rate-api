@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Testing\Fluent\AssertableJson;
+use LauanaOH\Dracma\Models\CurrenciesRate;
 use Tests\TestCase;
 
 class ConvertTest extends TestCase
@@ -41,6 +42,38 @@ class ConvertTest extends TestCase
                 ->where('quote', 5.67)
                 ->where('result', 56.70)
                 ->where('date', '2021-11-27')
+            ));
+    }
+
+    public function testItCanConvertARequestWithCustomDate()
+    {
+        CurrenciesRate::create([
+            'from' => 'USD',
+            'to' => 'BRL',
+            'quote' => 3.2478,
+            'date' => '2021-11-26',
+        ]);
+
+        $response = $this->postJson('/api/convert', [
+            [
+                'from' => 'USD',
+                'to' => 'BRL',
+                'value' => 10,
+                'date' => '2021-11-26',
+            ],
+        ]);
+
+        $response->assertOk();
+        $response->assertJson(fn (AssertableJson $json) => $json
+            ->has(
+                '0',
+                fn (AssertableJson $json) => $json
+                ->where('from', 'USD')
+                ->where('to', 'BRL')
+                ->where('value', 10)
+                ->where('quote', 3.2478)
+                ->where('result', 32.48)
+                ->where('date', '2021-11-26')
             ));
     }
 
