@@ -100,7 +100,7 @@ class ConvertTest extends TestCase
                 'from' => 'USD',
                 'to' => 'BRL',
                 'value' => 10,
-            ]
+            ],
         ];
 
         return [
