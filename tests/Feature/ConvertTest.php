@@ -30,7 +30,7 @@ class ConvertTest extends TestCase
             ],
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertJson(fn (AssertableJson $json) => $json
             ->has(
                 '0',
@@ -59,7 +59,7 @@ class ConvertTest extends TestCase
             ],
         ]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertJson(fn (AssertableJson $json) => $json
             ->has(
                 '0',
@@ -80,5 +80,65 @@ class ConvertTest extends TestCase
                 ->where('result', 1467)
                 ->where('date', '2021-11-27')
             ));
+    }
+
+    /**
+     * @dataProvider invalidRequest
+     */
+    public function testItCanNotConvertIfRequestFormatIsInvalid(array $request, string $key, string $message)
+    {
+        $response = $this->postJson('/api/convert', $request);
+
+        $response->assertUnprocessable();
+        $this->assertEquals($message, $response['errors'][$key][0]);
+    }
+
+    public function invalidRequest(): array
+    {
+        $data = [
+            [
+                'from' => 'USD',
+                'to' => 'BRL',
+                'value' => 10,
+            ]
+        ];
+
+        return [
+            'from is missing' => [
+                array_replace_recursive($data, [['from' => null]]),
+                '0.from',
+                'The 0.from field is required.',
+            ],
+            'from is not string' => [
+                array_replace_recursive($data, [['from' => [null]]]),
+                '0.from',
+                'The 0.from must be a string.',
+            ],
+            'to is missing' => [
+                array_replace_recursive($data, [['to' => null]]),
+                '0.to',
+                'The 0.to field is required.',
+            ],
+            'to is not string' => [
+                array_replace_recursive($data, [['to' => [null]]]),
+                '0.to',
+                'The 0.to must be a string.',
+            ],
+            'value is missing' => [
+                array_replace_recursive($data, [['value' => null]]),
+                '0.value',
+                'The 0.value field is required.',
+            ],
+            'value is not numeric' => [
+                array_replace_recursive($data, [['value' => 'abd']]),
+                '0.value',
+                'The 0.value must be a number.',
+            ],
+            'date has invalid format' => [
+                array_replace_recursive($data, [['date' => '2021-27']]),
+                '0.date',
+                'The 0.date does not match the format Y-m-d.',
+            ],
+        ];
     }
 }
